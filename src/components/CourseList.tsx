@@ -66,7 +66,7 @@ const CourseList = () => {
       {CPENCourses.map((course) => (
         <Card variant="outlined" sx={{ height: "16rem", width: "25rem" }}>
           <ScrollableCardContent>
-            <Typography variant="h5">{course.code}</Typography>
+            <Typography variant="h5" sx={{color: "#A6192E"}}>{course.code}</Typography>
             <Typography variant="subtitle1">{course.name}</Typography>
             <Typography variant="body2" color="text.secondary">
               {course.desc}

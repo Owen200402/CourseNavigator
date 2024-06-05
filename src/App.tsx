@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import CourseList from "./components/CourseList";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import RadioGroupYearFilter from "./components/RadioGroupYearFilter";
 
 function App() {
@@ -10,10 +10,18 @@ function App() {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={4}  md={3.5} lg={1}>
-          <div className="flexMiddle"><RadioGroupYearFilter></RadioGroupYearFilter></div>
+        <Grid item xs={3} lg={1.5} xl={1}>
+          <div className="flexMiddle">
+            <RadioGroupYearFilter></RadioGroupYearFilter>
+          </div>
         </Grid>
-        <Grid item xs={8}  md={8.5} lg={11}>
+        <Grid item xs={9} lg={10.5} xl={11}>
+          <Typography
+            variant="h2"
+            style={{ textAlign: "center", color: "#C8102E", margin: "1rem" }}
+          >
+            Engineering Courses {new Date().getFullYear()}
+          </Typography>
           <CourseList></CourseList>
         </Grid>
       </Grid>
