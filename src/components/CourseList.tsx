@@ -4,27 +4,45 @@ import CardContent from "@mui/material/CardContent";
 import { Box, Skeleton, Typography } from "@mui/material";
 import useCourses from "../hooks/useCourses";
 
+interface Props {
+  year: number;
+}
+
 const ScrollableCardContent = styled(CardContent)`
   height: 12rem;
   overflow-y: auto;
 `;
 
-const CourseList = () => {
+const CourseList = ({ year }: Props) => {
   const { courses, setCourses, error, isLoading } = useCourses();
 
-  const CPENCourses = courses
+  let CPENCourses = courses
     .filter((course) => course.dept === "CPEN")
     .sort((a, b) => (a._id > b._id ? 1 : -1));
-  const ELECCourses = courses
+  let ELECCourses = courses
     .filter((course) => course.dept === "ELEC")
     .sort((a, b) => (a._id > b._id ? 1 : -1));
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  if (year === 2) {
+    CPENCourses = CPENCourses.filter((course) => course.code.substring(5, 6) === "2")
+  }
+  if (year === 3) {
+    CPENCourses = CPENCourses.filter((course) => course.code.substring(5, 6) === "3")
+  }
+  if (year === 4) {
+    CPENCourses = CPENCourses.filter((course) => course.code.substring(5, 6) === "4")
+  }
 
   return (
     <div className="card-container">
       {isLoading &&
         skeletons.map((skeleton) => (
-          <Card variant="outlined" sx={{ height: "16rem", width: "25rem" }}>
+          <Card
+            key={skeleton}
+            variant="outlined"
+            sx={{ height: "16rem", width: "25rem" }}
+          >
             <Skeleton
               variant="rectangular"
               width={150}
@@ -64,9 +82,15 @@ const CourseList = () => {
           </Card>
         ))}
       {CPENCourses.map((course) => (
-        <Card variant="outlined" sx={{ height: "16rem", width: "25rem" }}>
+        <Card
+          key={course._id}
+          variant="outlined"
+          sx={{ height: "16rem", width: "25rem" }}
+        >
           <ScrollableCardContent>
-            <Typography variant="h5" sx={{color: "#A6192E"}}>{course.code}</Typography>
+            <Typography variant="h5" sx={{ color: "#801323" }}>
+              {course.code}
+            </Typography>
             <Typography variant="subtitle1">{course.name}</Typography>
             <Typography variant="body2" color="text.secondary">
               {course.desc}
@@ -95,14 +119,24 @@ const CourseList = () => {
                   : "None"}
               </i>
             </Typography>
-            <Typography variant="caption" color="text.primary" sx={{ display: "block" }}><i>Credit: {course.cred}</i></Typography>
+            <Typography
+              variant="caption"
+              color="text.primary"
+              sx={{ display: "block" }}
+            >
+              <i>Credit: {course.cred}</i>
+            </Typography>
           </ScrollableCardContent>
         </Card>
       ))}
       {ELECCourses.map((course) => (
-        <Card variant="outlined" sx={{ height: "16rem", width: "25rem" }}>
+        <Card
+          key={course._id}
+          variant="outlined"
+          sx={{ height: "16rem", width: "25rem" }}
+        >
           <ScrollableCardContent>
-            <Typography variant="h5">{course.code}</Typography>
+            <Typography variant="h5" sx={{ color: "#002145" }}>{course.code}</Typography>
             <Typography variant="subtitle1">{course.name}</Typography>
             <Typography variant="body2" color="text.secondary">
               {course.desc}
@@ -131,7 +165,13 @@ const CourseList = () => {
                   : "None"}
               </i>
             </Typography>
-            <Typography variant="caption" color="text.primary" sx={{ display: "block" }}><i>Credit: {course.cred}</i></Typography>
+            <Typography
+              variant="caption"
+              color="text.primary"
+              sx={{ display: "block" }}
+            >
+              <i>Credit: {course.cred}</i>
+            </Typography>
           </ScrollableCardContent>
         </Card>
       ))}
