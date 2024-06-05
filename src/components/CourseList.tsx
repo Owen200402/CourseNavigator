@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Button, Link, Skeleton, Typography } from "@mui/material";
 import useCourses from "../hooks/useCourses";
+import { useState } from "react";
 
 interface Props {
   year: number;
@@ -11,10 +12,18 @@ interface Props {
 const ScrollableCardContent = styled(CardContent)`
   height: 12rem;
   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CourseList = ({ year }: Props) => {
   const { courses, setCourses, error, isLoading } = useCourses();
+  const [isExpanded, setExpand] = useState(false);
 
   let CPENCourses = courses
     .filter((course) => course.dept === "CPEN")
@@ -25,14 +34,28 @@ const CourseList = ({ year }: Props) => {
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   if (year === 2) {
-    CPENCourses = CPENCourses.filter((course) => course.code.substring(5, 6) === "2")
+    CPENCourses = CPENCourses.filter(
+      (course) => course.code.substring(5, 6) === "2"
+    );
   }
   if (year === 3) {
-    CPENCourses = CPENCourses.filter((course) => course.code.substring(5, 6) === "3")
+    CPENCourses = CPENCourses.filter(
+      (course) => course.code.substring(5, 6) === "3"
+    );
   }
   if (year === 4) {
-    CPENCourses = CPENCourses.filter((course) => course.code.substring(5, 6) === "4")
+    CPENCourses = CPENCourses.filter(
+      (course) => course.code.substring(5, 6) === "4"
+    );
   }
+
+  const expandText = () => {
+    setExpand(true);
+  };
+
+  const shrinkText = () => {
+    setExpand(false);
+  };
 
   return (
     <div className="card-container">
@@ -92,9 +115,29 @@ const CourseList = ({ year }: Props) => {
               {course.code}
             </Typography>
             <Typography variant="subtitle1">{course.name}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {course.desc}
-            </Typography>
+            {isExpanded ? (
+              <Typography variant="body2" color="text.secondary">
+                {course.desc}{"  "}
+                <Link
+                  color="#c22bb5"
+                  onClick={() => shrinkText()}
+                  style={{ cursor: "pointer" }}
+                >
+                  show less
+                </Link>
+              </Typography>
+            ) : (
+              <Typography variant="body2" color="text.secondary">
+                {course.desc.substring(0, 160)}{" "}
+                <Link
+                  color="#3fb2ba"
+                  onClick={() => expandText()}
+                  style={{ cursor: "pointer" }}
+                >
+                  show more
+                </Link>
+              </Typography>
+            )}
             <Typography
               variant="caption"
               color="text.primary"
@@ -136,11 +179,33 @@ const CourseList = ({ year }: Props) => {
           sx={{ height: "16rem", width: "25rem" }}
         >
           <ScrollableCardContent>
-            <Typography variant="h5" sx={{ color: "#002145" }}>{course.code}</Typography>
-            <Typography variant="subtitle1">{course.name}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {course.desc}
+            <Typography variant="h5" sx={{ color: "#002145" }}>
+              {course.code}
             </Typography>
+            <Typography variant="subtitle1">{course.name}</Typography>
+            {isExpanded ? (
+              <Typography variant="body2" color="text.secondary">
+                {course.desc}{"  "}
+                <Link
+                  color="#c22bb5"
+                  onClick={() => shrinkText()}
+                  style={{ cursor: "pointer" }}
+                >
+                  show less
+                </Link>
+              </Typography>
+            ) : (
+              <Typography variant="body2" color="text.secondary">
+                {course.desc.substring(0, 160)}{" "}
+                <Link
+                  color="#3fb2ba"
+                  onClick={() => expandText()}
+                  style={{ cursor: "pointer" }}
+                >
+                  show more
+                </Link>
+              </Typography>
+            )}
             <Typography
               variant="caption"
               color="text.primary"
