@@ -41,14 +41,23 @@ const CourseList = ({ year }: Props) => {
     CPENCourses = CPENCourses.filter(
       (course) => course.code.substring(5, 6) === "2"
     );
+    ELECCourses = ELECCourses.filter(
+      (course) => course.code.substring(5, 6) === "2"
+    );
   }
   if (year === 3) {
     CPENCourses = CPENCourses.filter(
       (course) => course.code.substring(5, 6) === "3"
     );
+    ELECCourses = ELECCourses.filter(
+      (course) => course.code.substring(5, 6) === "3"
+    );
   }
   if (year === 4) {
     CPENCourses = CPENCourses.filter(
+      (course) => course.code.substring(5, 6) === "4"
+    );
+    ELECCourses = ELECCourses.filter(
       (course) => course.code.substring(5, 6) === "4"
     );
   }
