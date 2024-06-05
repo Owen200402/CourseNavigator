@@ -4,6 +4,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 
 interface Props {
@@ -31,25 +32,25 @@ const RadioGroupYearFilter = ({
           <FormControlLabel
             value="year_2"
             control={<Radio />}
-            label="Year 2"
+            label={<Typography sx={{ fontSize: 'rem' }}>Year 2</Typography>}
             onClick={onClickYear2}
           />
           <FormControlLabel
             value="year_3"
             control={<Radio />}
-            label="Year 3"
+            label={<Typography sx={{ fontSize: '1rem' }}>Year 3</Typography>}
             onClick={onClickYear3}
           />
           <FormControlLabel
             value="year_4"
             control={<Radio />}
-            label="Year 4"
+            label={<Typography sx={{ fontSize: '1rem' }}>Year 4</Typography>}
             onClick={onClickYear4}
           />
           <FormControlLabel
             value="show_all"
             control={<Radio />}
-            label="Show All"
+            label={<Typography sx={{ fontSize: '1rem' }}>Show All</Typography>}
             onClick={onClickAll}
           />
         </RadioGroup>

@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={3} lg={1.5} xl={1}>
+        <Grid item xs={2.2} lg={1.5} xl={1}>
           <div className="flexMiddle">
             <RadioGroupYearFilter
               onClickYear2={onClickYear2}
@@ -37,7 +37,7 @@ function App() {
             ></RadioGroupYearFilter>
           </div>
         </Grid>
-        <Grid item xs={9} lg={10.5} xl={11}>
+        <Grid item xs={9.8} lg={10.5} xl={11} padding="1rem">
           <Typography
             variant="h2"
             style={{ textAlign: "center", color: "#A6192E", margin: "1rem" }}

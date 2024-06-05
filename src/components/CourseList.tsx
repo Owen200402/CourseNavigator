@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Box, Button, Link, Skeleton, Typography } from "@mui/material";
+import { Link, Skeleton, Typography } from "@mui/material";
 import useCourses from "../hooks/useCourses";
 import { useState } from "react";
 
 interface Props {
   year: number;
+}
+
+interface ExpandedCourses {
+  [key: string]: boolean;
 }
 
 const ScrollableCardContent = styled(CardContent)`
@@ -23,7 +27,7 @@ const ScrollableCardContent = styled(CardContent)`
 
 const CourseList = ({ year }: Props) => {
   const { courses, setCourses, error, isLoading } = useCourses();
-  const [isExpanded, setExpand] = useState(false);
+  const [ExpandedCourses, setExpandedCourses] = useState<ExpandedCourses>({});
 
   let CPENCourses = courses
     .filter((course) => course.dept === "CPEN")
@@ -49,12 +53,11 @@ const CourseList = ({ year }: Props) => {
     );
   }
 
-  const expandText = () => {
-    setExpand(true);
-  };
-
-  const shrinkText = () => {
-    setExpand(false);
+  const expandOrShrink = (id: string) => {
+    setExpandedCourses((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id], // without the bracket on [id]:, the key will be id instead of the course._id passed in here.
+    }));
   };
 
   return (
@@ -115,12 +118,13 @@ const CourseList = ({ year }: Props) => {
               {course.code}
             </Typography>
             <Typography variant="subtitle1">{course.name}</Typography>
-            {isExpanded ? (
+            {ExpandedCourses[course._id] ? (
               <Typography variant="body2" color="text.secondary">
-                {course.desc}{"  "}
+                {course.desc}
+                {"  "}
                 <Link
                   color="#c22bb5"
-                  onClick={() => shrinkText()}
+                  onClick={() => expandOrShrink(course._id)}
                   style={{ cursor: "pointer" }}
                 >
                   show less
@@ -131,7 +135,7 @@ const CourseList = ({ year }: Props) => {
                 {course.desc.substring(0, 160)}{" "}
                 <Link
                   color="#3fb2ba"
-                  onClick={() => expandText()}
+                  onClick={() => expandOrShrink(course._id)}
                   style={{ cursor: "pointer" }}
                 >
                   show more
@@ -183,12 +187,13 @@ const CourseList = ({ year }: Props) => {
               {course.code}
             </Typography>
             <Typography variant="subtitle1">{course.name}</Typography>
-            {isExpanded ? (
+            {ExpandedCourses[course._id] ? (
               <Typography variant="body2" color="text.secondary">
-                {course.desc}{"  "}
+                {course.desc}
+                {"  "}
                 <Link
                   color="#c22bb5"
-                  onClick={() => shrinkText()}
+                  onClick={() => expandOrShrink(course._id)}
                   style={{ cursor: "pointer" }}
                 >
                   show less
@@ -199,7 +204,7 @@ const CourseList = ({ year }: Props) => {
                 {course.desc.substring(0, 160)}{" "}
                 <Link
                   color="#3fb2ba"
-                  onClick={() => expandText()}
+                  onClick={() => expandOrShrink(course._id)}
                   style={{ cursor: "pointer" }}
                 >
                   show more
