@@ -32,25 +32,25 @@ const RadioGroupYearFilter = ({
           <FormControlLabel
             value="year_2"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: 'rem' }}>Year 2</Typography>}
+            label={<Typography sx={{ fontSize: 'rem', whiteSpace: "nowrap"}}>Year 2</Typography>}
             onClick={onClickYear2}
           />
           <FormControlLabel
             value="year_3"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: '1rem' }}>Year 3</Typography>}
+            label={<Typography sx={{ fontSize: '1rem', whiteSpace: "nowrap" }}>Year 3</Typography>}
             onClick={onClickYear3}
           />
           <FormControlLabel
             value="year_4"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: '1rem' }}>Year 4</Typography>}
+            label={<Typography sx={{ fontSize: '1rem', whiteSpace: "nowrap" }}>Year 4</Typography>}
             onClick={onClickYear4}
           />
           <FormControlLabel
             value="show_all"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: '1rem' }}>Show All</Typography>}
+            label={<Typography sx={{ fontSize: '1rem', whiteSpace: "nowrap" }}>Show All</Typography>}
             onClick={onClickAll}
           />
         </RadioGroup>
