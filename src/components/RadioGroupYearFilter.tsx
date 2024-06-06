@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   FormControl,
   FormLabel,
@@ -6,6 +7,15 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+
+const FilterLabel = styled(Typography) `
+  font-size: 1rem;
+  white-space: nowrap;
+
+  @media (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+`
 
 interface Props {
   onClickYear2: () => void;
@@ -32,25 +42,25 @@ const RadioGroupYearFilter = ({
           <FormControlLabel
             value="year_2"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: 'rem', whiteSpace: "nowrap"}}>Year 2</Typography>}
+            label={<FilterLabel>Year 2</FilterLabel>}
             onClick={onClickYear2}
           />
           <FormControlLabel
             value="year_3"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: '1rem', whiteSpace: "nowrap" }}>Year 3</Typography>}
+            label={<FilterLabel>Year 3</FilterLabel>}
             onClick={onClickYear3}
           />
           <FormControlLabel
             value="year_4"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: '1rem', whiteSpace: "nowrap" }}>Year 4</Typography>}
+            label={<FilterLabel>Year 4</FilterLabel>}
             onClick={onClickYear4}
           />
           <FormControlLabel
-            value="show_all"
+            value="all"
             control={<Radio />}
-            label={<Typography sx={{ fontSize: '1rem', whiteSpace: "nowrap" }}>Show All</Typography>}
+            label={<FilterLabel>All</FilterLabel>}
             onClick={onClickAll}
           />
         </RadioGroup>
