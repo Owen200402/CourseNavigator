@@ -41,7 +41,7 @@ function App() {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={2.5} lg={1.5} xl={1}>
+        <Grid item xs={2.5} lg={1.3} xl={1}>
           <div className="flexMiddle">
             <RadioGroupYearFilter
               onClickYear2={onClickYear2}
@@ -51,7 +51,7 @@ function App() {
             ></RadioGroupYearFilter>
           </div>
         </Grid>
-        <Grid item xs={9.5} lg={10.5} xl={11} padding="1rem">
+        <Grid item xs={9.5} lg={10.7} xl={11} padding="1rem">
           <Title variant="h2">
             Engineering Courses {new Date().getFullYear()}
           </Title>
