@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 import CourseList from "./components/CourseList";
-import { Grid, Typography, styled } from "@mui/material";
+import { Box, Grid, Typography, styled } from "@mui/material";
 import RadioGroupYearFilter from "./components/RadioGroupYearFilter";
+import CourseFilter from "./components/CourseFilter";
 
-const Title = styled(Typography) `
+const Title = styled(Typography)`
   white-space: nowrap;
   margin: 1rem;
-  color: #A6192E;
+  color: #a6192e;
   text-align: center;
 
   @media (max-width: 1024px) {
@@ -16,7 +17,7 @@ const Title = styled(Typography) `
   @media (max-width: 768px) {
     font-size: 1.5rem;
   }
-`
+`;
 
 function App() {
   const [year, setYear] = useState(0);
@@ -55,7 +56,8 @@ function App() {
           <Title variant="h2">
             Engineering Courses {new Date().getFullYear()}
           </Title>
-          <CourseList year={year}></CourseList>
+            <CourseFilter></CourseFilter>
+            <CourseList year={year}></CourseList>
         </Grid>
       </Grid>
     </>
