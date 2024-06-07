@@ -1,16 +1,9 @@
-import styled from "@emotion/styled";
 
-const MyDiv = styled.div`
-  @media (max-width: 1280px) {
-    display: inline-flex;
-    justify-centent: center;
-    align-items: center;
-  }
-`;
+
 
 const CourseFilter = () => {
   return (
-    <MyDiv className="btn-group dropend m-2">
+    <div className="btn-group dropend m-2">
       <button
         className="btn btn-secondary dropdown-toggle"
         type="button"
@@ -32,7 +25,7 @@ const CourseFilter = () => {
           </a>
         </li>
       </ul>
-    </MyDiv>
+    </div>
   );
 };
 
