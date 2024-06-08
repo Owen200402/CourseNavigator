@@ -30,6 +30,7 @@ const MyDiv = styled.div`
 
 function App() {
   const [year, setYear] = useState(0);
+  const [dept, setDept] = useState<string | null>(null);
 
   const onClickYear2 = () => {
     setYear(2);
@@ -47,6 +48,10 @@ function App() {
   const onClickAll = () => {
     setYear(0);
   };
+
+  const onSelectDept = (dept: string | null) => {
+    setDept(dept);
+  }
 
   return (
     <>
@@ -67,9 +72,9 @@ function App() {
           </Title>
           <Box>
             <MyDiv>
-              <CourseFilter />
+              <CourseFilter onSelectDept={onSelectDept} />
             </MyDiv>
-            <CourseList year={year} />
+            <CourseList year={year} dept={dept}/>
           </Box>
         </Grid>
       </Grid>

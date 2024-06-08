@@ -7,6 +7,7 @@ import { useState } from "react";
 
 interface Props {
   year: number;
+  dept: string | null;
 }
 
 interface ExpandedCourses {
@@ -25,7 +26,7 @@ const ScrollableCardContent = styled(CardContent)`
   }
 `;
 
-const CourseList = ({ year }: Props) => {
+const CourseList = ({ year, dept }: Props) => {
   const { courses, setCourses, error, isLoading } = useCourses();
   const [ExpandedCourses, setExpandedCourses] = useState<ExpandedCourses>({});
 
@@ -116,7 +117,7 @@ const CourseList = ({ year }: Props) => {
             />
           </Card>
         ))}
-      {CPENCourses.map((course) => (
+      {(dept === null || dept === "CPEN") && CPENCourses.map((course) => (
         <Card
           key={course._id}
           variant="outlined"
@@ -185,7 +186,7 @@ const CourseList = ({ year }: Props) => {
           </ScrollableCardContent>
         </Card>
       ))}
-      {ELECCourses.map((course) => (
+      {(dept === null || dept === "ELEC") && ELECCourses.map((course) => (
         <Card
           key={course._id}
           variant="outlined"

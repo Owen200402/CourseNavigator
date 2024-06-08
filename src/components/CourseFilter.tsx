@@ -1,7 +1,8 @@
+interface Props {
+  onSelectDept: (dept: string) => void;
+}
 
-
-
-const CourseFilter = () => {
+const CourseFilter = ({ onSelectDept }: Props) => {
   return (
     <div className="btn-group dropend m-2">
       <button
@@ -15,14 +16,10 @@ const CourseFilter = () => {
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li>
-          <a className="dropdown-item" href="#">
-            CPEN
-          </a>
+          <button className="dropdown-item" onClick={() => onSelectDept("CPEN")}>CPEN</button>
         </li>
         <li>
-          <a className="dropdown-item" href="#">
-            ELEC
-          </a>
+          <button className="dropdown-item" onClick={() => onSelectDept("ELEC")}>ELEC</button>
         </li>
       </ul>
     </div>
