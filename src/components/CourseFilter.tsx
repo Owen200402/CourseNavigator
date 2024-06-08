@@ -1,8 +1,9 @@
 interface Props {
   onSelectDept: (dept: string) => void;
+  dept: string | null;
 }
 
-const CourseFilter = ({ onSelectDept }: Props) => {
+const CourseFilter = ({ onSelectDept, dept }: Props) => {
   return (
     <div className="btn-group dropend m-2">
       <button
@@ -12,7 +13,7 @@ const CourseFilter = ({ onSelectDept }: Props) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        Department{" "}
+        {dept ? dept: "Department"} {" "}
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li>

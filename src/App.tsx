@@ -72,7 +72,7 @@ function App() {
           </Title>
           <Box>
             <MyDiv>
-              <CourseFilter onSelectDept={onSelectDept} />
+              <CourseFilter onSelectDept={onSelectDept} dept={dept} />
             </MyDiv>
             <CourseList year={year} dept={dept}/>
           </Box>
