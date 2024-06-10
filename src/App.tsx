@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import RadioGroupYearFilter from "./components/RadioGroupYearFilter";
 import CourseFilter from "./components/CourseFilter";
 import styled from "@emotion/styled";
-import './custom.scss';
+import "./App.scss"
 
 const Title = styled(Typography)`
   white-space: nowrap;
