@@ -77,7 +77,7 @@ const CourseList = ({ year, dept }: Props) => {
           <Card
             key={skeleton}
             variant="outlined"
-            sx={{ height: "16rem", width: "25rem" }}
+            sx={{ height: "16rem", width: "25rem"}}
           >
             <Skeleton
               variant="rectangular"
@@ -121,7 +121,7 @@ const CourseList = ({ year, dept }: Props) => {
         <Card
           key={course._id}
           variant="outlined"
-          sx={{ height: "16rem", width: "25rem" }}
+          sx={{ height: "16rem", width: "25rem"}}
         >
           <ScrollableCardContent>
             <Typography variant="h5" sx={{ color: "#801323" }}>

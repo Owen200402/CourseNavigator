@@ -36,7 +36,7 @@ const RadioGroupYearFilter = ({
         <FormLabel id="demo-radio-buttons-group-label">Year</FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="show_all"
+          defaultValue="all"
           name="radio-buttons-group"
         >
           <FormControlLabel
