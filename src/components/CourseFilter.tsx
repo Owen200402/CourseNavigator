@@ -15,12 +15,12 @@ const CourseFilter = ({ onSelectDept, dept }: Props) => {
       >
         {dept ? dept: "Department"} {" "}
       </button>
-      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <ul className="dropdown-menu smooth-transition" aria-labelledby="dropdownMenuButton">
         <li>
-          <button className="dropdown-item" onClick={() => onSelectDept("CPEN")}>CPEN</button>
+          <button className="dropdown-item smooth-transition" onClick={() => onSelectDept("CPEN")}>CPEN</button>
         </li>
         <li>
-          <button className="dropdown-item" onClick={() => onSelectDept("ELEC")}>ELEC</button>
+          <button className="dropdown-item smooth-transition" onClick={() => onSelectDept("ELEC")}>ELEC</button>
         </li>
       </ul>
     </div>
