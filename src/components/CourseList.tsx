@@ -15,7 +15,7 @@ interface ExpandedCourses {
 }
 
 const ScrollableCardContent = styled(CardContent)`
-  height: 12rem;
+  height: 15rem;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
