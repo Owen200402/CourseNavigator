@@ -77,36 +77,36 @@ const CourseList = ({ year, dept }: Props) => {
           <Card
             key={skeleton}
             variant="outlined"
-            sx={{ height: "16rem", width: "25rem"}}
+            sx={{ height: "15rem", width: "22rem"}}
           >
             <Skeleton
               variant="rectangular"
               width={150}
-              height={30}
+              height={25}
               sx={{ margin: "0.5rem" }}
             />
             <Skeleton
               variant="rectangular"
               width={200}
-              height={30}
+              height={25}
               sx={{ margin: "0.5rem" }}
             />
             <Skeleton
               variant="rectangular"
-              width={350}
+              width={320}
               height={90}
               sx={{ margin: "0.5rem" }}
             />
             <Skeleton
               variant="rectangular"
-              width={250}
-              height={17}
+              width={200}
+              height={15}
               sx={{ margin: "0.5rem" }}
             />
             <Skeleton
               variant="rectangular"
-              width={250}
-              height={17}
+              width={200}
+              height={15}
               sx={{ margin: "0.5rem" }}
             />
             <Skeleton
@@ -121,7 +121,7 @@ const CourseList = ({ year, dept }: Props) => {
         <Card
           key={course._id}
           variant="outlined"
-          sx={{ height: "16rem", width: "25rem"}}
+          sx={{ height: "15rem", width: "22rem"}}
         >
           <ScrollableCardContent>
             <Typography variant="h5" sx={{ color: "#801323" }}>
@@ -190,7 +190,7 @@ const CourseList = ({ year, dept }: Props) => {
         <Card
           key={course._id}
           variant="outlined"
-          sx={{ height: "16rem", width: "25rem" }}
+          sx={{ height: "15rem", width: "22rem" }}
         >
           <ScrollableCardContent>
             <Typography variant="h5" sx={{ color: "#002145" }}>

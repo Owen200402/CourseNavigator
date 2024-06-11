@@ -51,7 +51,7 @@ function App() {
 
   const onSelectDept = (dept: string | null) => {
     setDept(dept);
-  }
+  };
 
   return (
     <>
@@ -74,7 +74,7 @@ function App() {
             <MyDiv>
               <CourseFilter onSelectDept={onSelectDept} dept={dept} />
             </MyDiv>
-            <CourseList year={year} dept={dept}/>
+            <CourseList year={year} dept={dept} />
           </Box>
         </Grid>
       </Grid>
