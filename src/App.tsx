@@ -76,7 +76,6 @@ function App() {
             </MyDiv>
             <CourseList year={year} dept={dept}/>
           </Box>
-          <CourseTree></CourseTree>
         </Grid>
       </Grid>
     </>
