@@ -27,7 +27,7 @@ const ScrollableCardContent = styled(CardContent)`
 `;
 
 const CourseList = ({ year, dept }: Props) => {
-  const { courses, setCourses, error, isLoading } = useCourses();
+  const { courses, isLoading } = useCourses();
   const [ExpandedCourses, setExpandedCourses] = useState<ExpandedCourses>({});
 
   let CPENCourses = courses
