@@ -40,27 +40,28 @@ const RadioGroupYearFilter = ({
           name="radio-buttons-group"
         >
           <FormControlLabel
+          
             value="year_2"
             control={<Radio />}
-            label={<FilterLabel>Year 2</FilterLabel>}
+            label={<FilterLabel sx={{marginLeft: "-0.2rem"}}>Year 2</FilterLabel>}
             onClick={onClickYear2}
           />
           <FormControlLabel
             value="year_3"
             control={<Radio />}
-            label={<FilterLabel>Year 3</FilterLabel>}
+            label={<FilterLabel sx={{marginLeft: "-0.2rem"}}>Year 3</FilterLabel>}
             onClick={onClickYear3}
           />
           <FormControlLabel
             value="year_4"
             control={<Radio />}
-            label={<FilterLabel>Year 4</FilterLabel>}
+            label={<FilterLabel sx={{marginLeft: "-0.2rem"}}>Year 4</FilterLabel>}
             onClick={onClickYear4}
           />
           <FormControlLabel
             value="all"
             control={<Radio />}
-            label={<FilterLabel>All</FilterLabel>}
+            label={<FilterLabel sx={{marginLeft: "-0.2rem"}}>All</FilterLabel>}
             onClick={onClickAll}
           />
         </RadioGroup>
