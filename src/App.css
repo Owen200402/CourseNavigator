@@ -27,3 +27,12 @@
 .smooth-transition {
   animation: fadeIn 0.5s ease;
 }
+
+
+@media (max-width: 768px) {
+
+  .absolute-btn {
+    position: absolute;
+  }
+}
+

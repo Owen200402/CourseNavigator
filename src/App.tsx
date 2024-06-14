@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import CourseList from "./components/CourseList";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import RadioGroupYearFilter from "./components/RadioGroupYearFilter";
 import CourseFilter from "./components/CourseFilter";
 import styled from "@emotion/styled";
@@ -31,6 +31,8 @@ const MyDiv = styled.div`
 function App() {
   const [year, setYear] = useState(0);
   const [dept, setDept] = useState<string | null>(null);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const onClickYear2 = () => {
     setYear(2);
@@ -67,7 +69,10 @@ function App() {
           </div>
         </Grid>
         <Grid item xs={9.5} lg={10.7} xl={11} padding="1rem">
-          <Title variant="h2">
+          <Title
+            variant="h2"
+            style={{ position: isSmallScreen ? "absolute" : "relative" }}
+          >
             Engineering Courses {new Date().getFullYear()}
           </Title>
           <Box>
