@@ -22,7 +22,7 @@ const CourseFilter = ({ onSelectDept, dept }: Props) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
         style={{
-          marginTop: isSmallScreen ? "5rem" : "0",
+          marginTop: isSmallScreen ? "1rem" : "0",
           marginRight: isSmallScreen ? "14rem" : "0",
         }}
       >

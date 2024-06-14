@@ -57,6 +57,9 @@ function App() {
 
   return (
     <>
+      <Title variant="h2" style={{ display: !isSmallScreen ? "none" : "block" }}>
+        Engineering Courses {new Date().getFullYear()}
+      </Title>
       <Grid container spacing={2}>
         <Grid item xs={2.5} lg={1.3} xl={1}>
           <div className="flexMiddle">
@@ -71,7 +74,7 @@ function App() {
         <Grid item xs={9.5} lg={10.7} xl={11} padding="1rem">
           <Title
             variant="h2"
-            style={{ position: isSmallScreen ? "absolute" : "relative" }}
+            style={{ display: isSmallScreen ? "none" : "block" }}
           >
             Engineering Courses {new Date().getFullYear()}
           </Title>
