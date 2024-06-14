@@ -57,7 +57,11 @@ function App() {
 
   return (
     <>
-      <Title variant="h2" style={{ display: !isSmallScreen ? "none" : "block" }}>
+      <Title
+        variant="h2"
+        style={{ display: !isSmallScreen ? "none" : "block" }}
+        className="customed-title"
+      >
         Engineering Courses {new Date().getFullYear()}
       </Title>
       <Grid container spacing={2}>
