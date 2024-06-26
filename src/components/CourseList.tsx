@@ -31,7 +31,7 @@ const CourseList = ({ year, dept }: Props) => {
   const [ExpandedCourses, setExpandedCourses] = useState<ExpandedCourses>({});
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  if (courses === undefined)
+  if (courses === undefined || isLoading)
     return (
       <div className="card-container">
         {
