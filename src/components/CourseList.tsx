@@ -31,7 +31,7 @@ const CourseList = ({ year, dept }: Props) => {
   const [ExpandedCourses, setExpandedCourses] = useState<ExpandedCourses>({});
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  if (isLoading)
+  if (courses === undefined)
     return (
       <div className="card-container">
         {
@@ -82,10 +82,6 @@ const CourseList = ({ year, dept }: Props) => {
       </div>
     );
   if (error) return <p>{error.message}</p>;
-
-  if (courses === undefined) {
-    return;
-  }
 
   let CPENCourses = courses
     .filter((course) => course.dept === "CPEN")
