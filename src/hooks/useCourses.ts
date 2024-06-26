@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import apiClient, { CanceledError } from "../services/api-client";
+import apiClient from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 interface Course {
   _id: string;
@@ -15,32 +15,12 @@ interface Course {
   creq: string[];
 }
 
-const useCourses = () => {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    setLoading(true);
-
-    apiClient
-      .get<Course[]>("", { signal: controller.signal })
-      .then((res) => {
-        setCourses(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        setLoading(false);
-      });
-
-      return () => controller.abort();
-  }, []);
-
-  return { courses, setCourses, error, isLoading }; 
-};
+const useCourses = () =>
+  useQuery<Course[], Error>({
+    queryKey: ["courses"],
+    queryFn: () => apiClient.get<Course[]>("").then((res) => res.data),
+    staleTime: 1000 * 60 * 1, // 1 minute
+    refetchOnWindowFocus: false,
+  });
 
 export default useCourses;

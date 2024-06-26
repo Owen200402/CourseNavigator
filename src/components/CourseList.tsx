@@ -27,8 +27,65 @@ const ScrollableCardContent = styled(CardContent)`
 `;
 
 const CourseList = ({ year, dept }: Props) => {
-  const { courses, isLoading } = useCourses();
+  const { data: courses, error, isLoading } = useCourses();
   const [ExpandedCourses, setExpandedCourses] = useState<ExpandedCourses>({});
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  if (isLoading)
+    return (
+      <div className="card-container">
+        {
+          skeletons.map((skeleton) => (
+            <Card
+              key={skeleton}
+              variant="outlined"
+              sx={{ height: "15rem", width: "21rem" }}
+            >
+              <Skeleton
+                variant="rectangular"
+                width={150}
+                height={25}
+                sx={{ margin: "0.5rem" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={200}
+                height={25}
+                sx={{ margin: "0.5rem" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={320}
+                height={90}
+                sx={{ margin: "0.5rem" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={200}
+                height={15}
+                sx={{ margin: "0.5rem" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={200}
+                height={15}
+                sx={{ margin: "0.5rem" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={50}
+                height={15}
+                sx={{ margin: "0.5rem" }}
+              />
+            </Card>
+          ))}
+      </div>
+    );
+  if (error) return <p>{error.message}</p>;
+
+  if (courses === undefined) {
+    return;
+  }
 
   let CPENCourses = courses
     .filter((course) => course.dept === "CPEN")
@@ -36,7 +93,6 @@ const CourseList = ({ year, dept }: Props) => {
   let ELECCourses = courses
     .filter((course) => course.dept === "ELEC")
     .sort((a, b) => (a._id > b._id ? 1 : -1));
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   if (year === 2) {
     CPENCourses = CPENCourses.filter(
@@ -72,189 +128,154 @@ const CourseList = ({ year, dept }: Props) => {
 
   return (
     <div className="card-container">
-      {isLoading &&
-        skeletons.map((skeleton) => (
+      {(dept === null || dept === "CPEN") &&
+        CPENCourses.map((course) => (
           <Card
-            key={skeleton}
+            key={course._id}
             variant="outlined"
-            sx={{ height: "15rem", width: "21rem"}}
+            sx={{ height: "15rem", width: "21rem" }}
           >
-            <Skeleton
-              variant="rectangular"
-              width={150}
-              height={25}
-              sx={{ margin: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rectangular"
-              width={200}
-              height={25}
-              sx={{ margin: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rectangular"
-              width={320}
-              height={90}
-              sx={{ margin: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rectangular"
-              width={200}
-              height={15}
-              sx={{ margin: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rectangular"
-              width={200}
-              height={15}
-              sx={{ margin: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rectangular"
-              width={50}
-              height={15}
-              sx={{ margin: "0.5rem" }}
-            />
+            <ScrollableCardContent>
+              <Typography variant="h5" sx={{ color: "#801323" }}>
+                {course.code}
+              </Typography>
+              <Typography variant="subtitle1">{course.name}</Typography>
+              {ExpandedCourses[course._id] ? (
+                <Typography variant="body2" color="text.secondary">
+                  {course.desc}
+                  {"  "}
+                  <Link
+                    color="#c22bb5"
+                    onClick={() => expandOrShrink(course._id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    show less
+                  </Link>
+                </Typography>
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  {course.desc.substring(0, 160)}{" "}
+                  <Link
+                    color="#3fb2ba"
+                    onClick={() => expandOrShrink(course._id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    show more
+                  </Link>
+                </Typography>
+              )}
+              <Typography
+                variant="caption"
+                color="text.primary"
+                sx={{ display: "block" }}
+              >
+                <i>
+                  Prerequisites:{" "}
+                  {course.prer
+                    ? course.prer
+                    : course.preq
+                    ? course.preq
+                    : "None"}
+                </i>
+              </Typography>
+              <Typography
+                variant="caption"
+                color="text.primary"
+                sx={{ display: "block" }}
+              >
+                <i>
+                  Corequisites:{" "}
+                  {course.crer
+                    ? course.crer
+                    : course.creq.length !== 0
+                    ? course.creq
+                    : "None"}
+                </i>
+              </Typography>
+              <Typography
+                variant="caption"
+                color="text.primary"
+                sx={{ display: "block" }}
+              >
+                <i>Credit: {course.cred}</i>
+              </Typography>
+            </ScrollableCardContent>
           </Card>
         ))}
-      {(dept === null || dept === "CPEN") && CPENCourses.map((course) => (
-        <Card
-          key={course._id}
-          variant="outlined"
-          sx={{ height: "15rem", width: "21rem"}}
-        >
-          <ScrollableCardContent>
-            <Typography variant="h5" sx={{ color: "#801323" }}>
-              {course.code}
-            </Typography>
-            <Typography variant="subtitle1">{course.name}</Typography>
-            {ExpandedCourses[course._id] ? (
-              <Typography variant="body2" color="text.secondary">
-                {course.desc}
-                {"  "}
-                <Link
-                  color="#c22bb5"
-                  onClick={() => expandOrShrink(course._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  show less
-                </Link>
+      {(dept === null || dept === "ELEC") &&
+        ELECCourses.map((course) => (
+          <Card
+            key={course._id}
+            variant="outlined"
+            sx={{ height: "15rem", width: "21rem" }}
+          >
+            <ScrollableCardContent>
+              <Typography variant="h5" sx={{ color: "#002145" }}>
+                {course.code}
               </Typography>
-            ) : (
-              <Typography variant="body2" color="text.secondary">
-                {course.desc.substring(0, 160)}{" "}
-                <Link
-                  color="#3fb2ba"
-                  onClick={() => expandOrShrink(course._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  show more
-                </Link>
+              <Typography variant="subtitle1">{course.name}</Typography>
+              {ExpandedCourses[course._id] ? (
+                <Typography variant="body2" color="text.secondary">
+                  {course.desc}
+                  {"  "}
+                  <Link
+                    color="#c22bb5"
+                    onClick={() => expandOrShrink(course._id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    show less
+                  </Link>
+                </Typography>
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  {course.desc.substring(0, 160)}{" "}
+                  <Link
+                    color="#3fb2ba"
+                    onClick={() => expandOrShrink(course._id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    show more
+                  </Link>
+                </Typography>
+              )}
+              <Typography
+                variant="caption"
+                color="text.primary"
+                sx={{ display: "block" }}
+              >
+                <i>
+                  Prerequisites:{" "}
+                  {course.prer
+                    ? course.prer
+                    : course.preq
+                    ? course.preq
+                    : "None"}
+                </i>
               </Typography>
-            )}
-            <Typography
-              variant="caption"
-              color="text.primary"
-              sx={{ display: "block" }}
-            >
-              <i>
-                Prerequisites:{" "}
-                {course.prer ? course.prer : course.preq ? course.preq : "None"}
-              </i>
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.primary"
-              sx={{ display: "block" }}
-            >
-              <i>
-                Corequisites:{" "}
-                {course.crer
-                  ? course.crer
-                  : course.creq.length !== 0
-                  ? course.creq
-                  : "None"}
-              </i>
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.primary"
-              sx={{ display: "block" }}
-            >
-              <i>Credit: {course.cred}</i>
-            </Typography>
-          </ScrollableCardContent>
-        </Card>
-      ))}
-      {(dept === null || dept === "ELEC") && ELECCourses.map((course) => (
-        <Card
-          key={course._id}
-          variant="outlined"
-          sx={{ height: "15rem", width: "21rem" }}
-        >
-          <ScrollableCardContent>
-            <Typography variant="h5" sx={{ color: "#002145" }}>
-              {course.code}
-            </Typography>
-            <Typography variant="subtitle1">{course.name}</Typography>
-            {ExpandedCourses[course._id] ? (
-              <Typography variant="body2" color="text.secondary">
-                {course.desc}
-                {"  "}
-                <Link
-                  color="#c22bb5"
-                  onClick={() => expandOrShrink(course._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  show less
-                </Link>
+              <Typography
+                variant="caption"
+                color="text.primary"
+                sx={{ display: "block" }}
+              >
+                <i>
+                  Corequisites:{" "}
+                  {course.crer
+                    ? course.crer
+                    : course.creq.length !== 0
+                    ? course.creq
+                    : "None"}
+                </i>
               </Typography>
-            ) : (
-              <Typography variant="body2" color="text.secondary">
-                {course.desc.substring(0, 160)}{" "}
-                <Link
-                  color="#3fb2ba"
-                  onClick={() => expandOrShrink(course._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  show more
-                </Link>
+              <Typography
+                variant="caption"
+                color="text.primary"
+                sx={{ display: "block" }}
+              >
+                <i>Credit: {course.cred}</i>
               </Typography>
-            )}
-            <Typography
-              variant="caption"
-              color="text.primary"
-              sx={{ display: "block" }}
-            >
-              <i>
-                Prerequisites:{" "}
-                {course.prer ? course.prer : course.preq ? course.preq : "None"}
-              </i>
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.primary"
-              sx={{ display: "block" }}
-            >
-              <i>
-                Corequisites:{" "}
-                {course.crer
-                  ? course.crer
-                  : course.creq.length !== 0
-                  ? course.creq
-                  : "None"}
-              </i>
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.primary"
-              sx={{ display: "block" }}
-            >
-              <i>Credit: {course.cred}</i>
-            </Typography>
-          </ScrollableCardContent>
-        </Card>
-      ))}
+            </ScrollableCardContent>
+          </Card>
+        ))}
     </div>
   );
 };
